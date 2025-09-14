@@ -1,0 +1,518 @@
+/* --- 0. Basic Reset & Global Box Sizing --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* --- 1. CSS Variables (Color Palette & Spacing) --- */
+:root {
+    /* Primary Brand Colors */
+    --color-primary-navy-blue: #004C74;
+    --color-light-green: #74BF44;
+    --color-dark-orange: #F28D2B;
+    /* Secondary Colors (for Charts and Accents) */
+    --color-light-blue: #00B0DA; /* Approx from P2 */
+    --color-dark-green: #008064; /* Approx from P2 */
+    --color-light-gray: #D6D7D7; /* Approx from P2 */
+    /* Tertiary Colors (for Charts and Accents) */
+    --color-light-purple: #9362AC; /* Approx from P2 */
+    --color-dark-purple: #6E3887; /* Approx from P2 */
+    /* Neutrals */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-dark-gray-body: #5E5E5E; /* Main body text color, P2 */
+    --color-section-separator: #DEDEDE; /* Thin horizontal lines */
+    --color-table-row-alternate: #F8F8F8; /* Inferred for table striping */
+    /* Spacing Scale (for consistent margins/padding) */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-xxl: 4rem;    /* 64px */
+}
+/* --- 2. Typography (Font Family, Sizes, Weights) --- */
+body {
+    /* Segoe UI with system font fallbacks */
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica
+Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--color-dark-gray-body);
+    font-size: 1rem; /* Base body text size: 16px */
+    background-color: var(--color-black); /* Outer page background */
+}
+
+/* Headings - Mapped to PowerPoint usage */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin-bottom: 0.5em; /* Default spacing below headings */
+    color: var(--color-dark-gray-body); /* Default for light backgrounds */
+}
+.style-guide-h1, h1 { /* Main titles like "Font Use", "Insert Title of Presentation 
+Here" */
+    font-size: 2.5rem; /* Approx 40px */
+    font-weight: 600; /* Segoe UI Semibold */
+    margin-bottom: var(--spacing-md);
+}
+.style-guide-h2, h2 { /* Section titles like "Team Introduction Slide" */
+    font-size: 2rem; /* Approx 32px */
+    font-weight: 600; /* Segoe UI Semibold */
+    margin-bottom: var(--spacing-sm);
+}
+.style-guide-h3, h3 { /* Subheadings like "Firstname Lastname", "Column title goes 
+here" */
+    font-size: 1.5rem; /* Approx 24px */
+    font-weight: 600; /* Segoe UI Semibold */
+    margin-bottom: var(--spacing-sm);
+}
+.style-guide-h4, h4 { /* For large callouts/statistics (using Segoe UI Light in PPT)
+*/
+    font-size: 1.8rem; /* Approx 29px */
+    font-weight: 300; /* Segoe UI Light */
+    color: var(--color-dark-gray-body); /* Or white if on dark background */
+    margin-bottom: var(--spacing-xs);
+}
+p.body-text, p { /* Standard body copy */
+    font-size: 1rem; /* 16px */
+    font-weight: 400; /* Segoe UI Regular */
+    margin-bottom: var(--spacing-sm);
+}
+p.small-text { /* Small text like page numbers, dates, captions */
+    font-size: 0.875rem; /* 14px */
+    font-weight: 400; /* Segoe UI Regular */
+    line-height: 1.4;
+}
+/* List styles */
+.style-guide-ul, ul {
+    list-style-type: disc; /* Default bullet */
+
+    margin-left: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+.style-guide-ul ul, ul ul {
+    list-style-type: circle; /* Nested bullet */
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+.style-guide-ul li, ul li {
+    margin-bottom: var(--spacing-xs);
+}
+/* Font Weight Utility Classes */
+.font-light { font-weight: 300; } /* Segoe UI Light */
+.font-regular { font-weight: 400; } /* Segoe UI Regular */
+.font-semibold { font-weight: 600; } /* Segoe UI Semibold */
+/* --- 3. Color Utility Classes --- */
+.text-white { color: var(--color-white); }
+.text-primary-navy-blue { color: var(--color-primary-navy-blue); }
+.text-light-green { color: var(--color-light-green); }
+.text-dark-orange { color: var(--color-dark-orange); }
+.text-dark-gray-body { color: var(--color-dark-gray-body); }
+.bg-white { background-color: var(--color-white); }
+.bg-black { background-color: var(--color-black); }
+.bg-primary-navy-blue { background-color: var(--color-primary-navy-blue); }
+.bg-light-green { background-color: var(--color-light-green); }
+.bg-dark-orange { background-color: var(--color-dark-orange); }
+.bg-light-blue { background-color: var(--color-light-blue); }
+.bg-dark-green { background-color: var(--color-dark-green); }
+.bg-light-gray { background-color: var(--color-light-gray); }
+.bg-light-purple { background-color: var(--color-light-purple); }
+.bg-dark-purple { background-color: var(--color-dark-purple); }
+.bg-dark-gray-body { background-color: var(--color-dark-gray-body); }
+/* --- 4. General Layout and Container --- */
+.container {
+    max-width: 1200px; /* Adjust based on your template's typical content width */
+    margin: 0 auto; /* Center the container */
+    padding: var(--spacing-xxl) var(--spacing-xl); /* Generous padding */
+    position: relative; /* For absolutely positioned elements within */
+}
+.section-block {
+    padding: var(--spacing-xxl) 0; /* Vertical padding for each section */
+    margin-bottom: var(--spacing-md); /* Space between sections */
+}
+/* Two-column grid (e.g., Page 1 layout) */
+
+.content-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: var(--spacing-xxl); /* Space between columns */
+    align-items: start; /* Align content to the top */
+}
+/* --- 5. Component Styling --- */
+/* Style Guide Specific Header */
+.style-guide-header {
+    background-color: var(--color-primary-navy-blue);
+    color: var(--color-white);
+    padding: var(--spacing-xxl) 0;
+    text-align: center;
+}
+.style-guide-header h1 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+}
+.style-guide-header p {
+    max-width: 800px;
+    margin: 0 auto;
+}
+/* Typography Section specific styles */
+.typography-section > * {
+    margin-bottom: var(--spacing-md);
+}
+.typography-section h1, .typography-section h2, .typography-section h3, 
+.typography-section h4 {
+    color: var(--color-dark-gray-body); /* Ensure headings are dark on white 
+background */
+}
+/* Color Palette Grid */
+.color-palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+.color-swatch {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--spacing-xs);
+    font-size: 0.75rem; /* 12px */
+    border: 1px solid var(--color-section-separator); /* Slight border for white 
+
+swatch */
+}
+.color-swatch span {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* For readability on similar colors 
+*/
+}
+/* Logo Display */
+.logo-display-grid {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+.logo-display-item {
+    padding: var(--spacing-md);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    flex: 1;
+}
+.logo-example {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: var(--spacing-sm);
+}
+/* Layout Examples */
+.layout-example-grid .grid-item {
+    border: 1px dashed var(--color-light-gray);
+    padding: var(--spacing-sm);
+    min-height: 100px;
+}
+/* Card Structure */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+.card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-section-separator);
+    border-radius: 4px;
+    padding: var(--spacing-md);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow like in some PPT 
+elements */
+
+}
+.card-title {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+.card-text {
+    font-size: 0.9rem;
+}
+/* Image Usage */
+.image-example {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    margin-top: var(--spacing-lg);
+}
+.image-overlay {
+    width: 45%; /* Matches PPT overlay width */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+/* Icon Section */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+.icon-item {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-section-separator);
+    border-radius: 4px;
+}
+.icon-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* For solid circle icons */
+    margin: 0 auto var(--spacing-xs);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white); /* For text inside placeholder */
+    font-weight: bold;
+}
+/* If using SVG icons, you'd style them something like: */
+.icon-item img {
+    width: 40px; /* Adjust size */
+    height: 40px;
+    margin-bottom: var(--spacing-xs);
+    /* For recoloring SVG icons, if they are inline SVG or loaded as background 
+images/masks */
+    /* fill: var(--color-primary-navy-blue); */
+}
+/* Style Guide Footer */
+.style-guide-footer {
+    background-color: var(--color-dark-gray-body);
+    color: var(--color-white);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    font-size: 0.875rem;
+}
+/* --- 6. Basic Responsiveness --- */
+@media (max-width: 992px) {
+    .container {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+    .content-grid-2 {
+        grid-template-columns: 1fr; /* Stack columns vertically */
+        gap: var(--spacing-md);
+    }
+    .image-overlay {
+        width: 100%;
+        height: 50%; /* Overlay takes half height on small screens */
+        align-items: flex-start;
+        padding: var(--spacing-md);
+    }
+    h1.style-guide-h1 { font-size: 2rem; }
+    h2.style-guide-h2 { font-size: 1.75rem; }
+    h3.style-guide-h3 { font-size: 1.25rem; }
+    h4.style-guide-h4 { font-size: 1.5rem; }
+}
+@media (max-width: 768px) {
+    body { font-size: 0.9375rem; /* 15px */ }
+
+    .color-palette-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunge Design System - Style Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- No external font import needed for Segoe UI (system font stack used) -->
+</head>
+<body>
+    <header class="style-guide-header">
+        <div class="container">
+            <h1>Bunge Web Design System</h1>
+            <p>This page serves as a style guide and reference for Bunge's web 
+presence, extracted from the official PowerPoint template.</p>
+        </div>
+    </header>
+    <main>
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">1. Typography</h2>
+                <div class="typography-section">
+                    <h1 class="style-guide-h1">H1 Title Example (Font Use, Title 
+Slide)</h1>
+                    <p class="small-text">Segoe UI Semibold, approx. 40-48px</p>
+                    <h2 class="style-guide-h2">H2 Section Title Example (Team 
+Introduction)</h2>
+                    <p class="small-text">Segoe UI Semibold, approx. 32px</p>
+                    <h3 class="style-guide-h3">H3 Subheading Example (Firstname 
+Lastname, Column Title)</h3>
+                    <p class="small-text">Segoe UI Semibold, approx. 24px</p>
+                    <h4 class="style-guide-h4">H4 Large Callout/Statistic (Segoe UI 
+Light on P1, Stats)</h4>
+                    <p class="small-text">Segoe UI Light, approx. 29px</p>
+                    <p class="body-text">This is an example of body copy using <span
+class="semibold-text">Segoe UI Regular</span>. This text aims to be clear and 
+readable, following the template's design principles for main content.</p>
+                    <p class="small-text">This is an example of small text, like 
+page numbers or dates. Segoe UI Regular, approx. 14px.</p>
+                    <ul class="style-guide-ul">
+                        <li>Bullet point item 1 (Segoe UI Regular)</li>
+                        <li>Bullet point item 2 (Segoe UI Regular)
+
+                            <ul>
+                                <li>Nested bullet point item 1</li>
+                                <li>Nested bullet point item 2</li>
+                            </ul>
+                        </li>
+                        <li>Bullet point item 3</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">2. Color Palette</h2>
+                <p>All colors used in the Bunge template:</p>
+                <div class="color-palette-grid">
+                    <div class="color-swatch bg-primary-navy-blue"><span 
+class="text-white">#004C74 (Primary Navy Blue)</span></div>
+                    <div class="color-swatch bg-light-green"><span 
+class="text-white">#74BF44 (Light Green)</span></div>
+                    <div class="color-swatch bg-dark-orange"><span 
+class="text-white">#F28D2B (Dark Orange)</span></div>
+                    <div class="color-swatch bg-light-blue"><span>#00B0DA (Light 
+Blue)</span></div>
+                    <div class="color-swatch bg-dark-green"><span>#008064 (Dark 
+Green)</span></div>
+                    <div class="color-swatch bg-light-gray"><span>#D6D7D7 (Light 
+Gray)</span></div>
+                    <div class="color-swatch bg-light-purple"><span 
+class="text-white">#9362AC (Light Purple)</span></div>
+                    <div class="color-swatch bg-dark-purple"><span 
+class="text-white">#6E3887 (Dark Purple)</span></div>
+                    <div class="color-swatch bg-dark-gray-body"><span 
+class="text-white">#5E5E5E (Body Text)</span></div>
+                    <div class="color-swatch bg-white"><span>#FFFFFF 
+(White)</span></div>
+                    <div class="color-swatch bg-black"><span 
+class="text-white">#000000 (Outer BG)</span></div>
+                </div>
+            </div>
+        </section>
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">3. Logos</h2>
+                <p>Bunge logos in different contexts:</p>
+                <div class="logo-display-grid">
+                    <div class="logo-display-item bg-primary-navy-blue">
+                        <img src="images/bunge-logo-white.svg" alt="Bunge Logo 
+White" class="logo-example">
+
+                        <p class="text-white small-text">White logo on dark 
+background</p>
+                    </div>
+                    <div class="logo-display-item bg-white">
+                        <img src="images/bunge-logo-dark.svg" alt="Bunge Logo Dark" 
+class="logo-example">
+                        <p class="small-text">Dark logo on light background</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">4. Layout Examples</h2>
+                <h3>4.1 Two-Column Grid</h3>
+                <div class="content-grid-2 layout-example-grid">
+                    <div class="grid-item">
+                        <p class="semibold-text">Left Column Content</p>
+                        <p>This area represents content typically found in a 
+two-column layout. It could be text, images, or forms.</p>
+                    </div>
+                    <div class="grid-item">
+                        <p class="semibold-text">Right Column Content</p>
+                        <p>This column shows a complementary piece of content. The 
+grid ensures consistent spacing and alignment.</p>
+                    </div>
+                </div>
+                <h3>4.2 Card Structure (Inferred from Team/Stat layouts)</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4 class="card-title">Card Title</h4>
+                        <p class="card-text">A flexible container for content 
+blocks, often with borders or subtle shadows.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Another Card</h4>
+                        <p class="card-text">Can be used for features, team members,
+statistics, etc.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title">Last Card</h4>
+                        <p class="card-text">Maintains consistent padding and design
+elements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">5. Image Usage</h2>
+                <p>Example of a hero background image (from Page 6):</p>
+                <div class="image-example hero-image-example" 
+style="background-image: url('images/hero-oil-spoon.jpg');">
+                    <div class="image-overlay bg-primary-navy-blue text-white">
+                        <h3 class="font-semibold">Image with Overlay</h3>
+                        <p class="font-regular">This demonstrates how a background 
+image can be combined with a colored overlay for text content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-block bg-white">
+            <div class="container">
+                <h2 class="style-guide-h2">6. Icons</h2>
+                <p>Place your extracted SVG icons here. For demonstration, I'll use 
+placeholders. You will replace these with your actual `<img>` tags pointing to your 
+`images/icons/` folder, or inline SVGs.</p>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <!-- Replace with actual SVG, e.g., <img 
+src="images/icons/icon-search.svg" alt="Search Icon"> -->
+                        <div class="icon-placeholder bg-dark-orange"></div>
+                        <p class="small-text">Icon Example 1</p>
+                    </div>
+                    <div class="icon-item">
+                         <div class="icon-placeholder bg-light-green"></div>
+                        <p class="small-text">Icon Example 2</p>
+                    </div>
+                    <div class="icon-item">
+                         <div class="icon-placeholder bg-primary-navy-blue"></div>
+                        <p class="small-text">Icon Example 3</p>
+                    </div>
+                     <div class="icon-item">
+                         <div class="icon-placeholder bg-light-gray"></div>
+                        <p class="small-text">Icon Example 4</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="style-guide-footer">
+        <div class="container">
+            <p>&copy; 2023 Bunge Design System. All rights reserved.</p>
+        </div>
+
+    </footer>
+</body>
+</html>
